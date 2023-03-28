@@ -7,20 +7,21 @@ public class Location {
    }
 
     public int getDistance() {
-       distance+=20;
+       distance+=10;
         return distance;
     }
     public String getName() {
-        if (getDistance() == 120) {
+       int setDistance=getDistance()+10;
+        if (setDistance == 120) {
             name = "Fort Leavenworth, Kansas";
         }
-        else if (getDistance() == 340) {
+        else if (setDistance == 340) {
             name = "Fort Kearney, Nebraska";
         }
-        else if(getDistance() == 420) {
+        else if(setDistance == 420) {
             name="Chimney Rock";
         }
-        else if(getDistance() == 500) {
+        else if(setDistance == 500) {
             name="Ash Hollow, Nebraska";
         }
         else{
@@ -32,3 +33,4 @@ return name;
        this.name=name;
     }
 }
+
