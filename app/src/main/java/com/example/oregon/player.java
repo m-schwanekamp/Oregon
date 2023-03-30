@@ -4,20 +4,22 @@ public class player {
     private int money = 1600;
     private int family = 5;
     private inventory inv = new inventory();
+    private int display = 0;
+    private int choice = 0;
 
     public player (String inName)
     {
         name = inName;
     }
 
-    public String displayName ()
+    public String getName ()
     {
         return name;
     }
 
-    public String displayInvText ()
+    public String getInvText ()
     {
-        String create = "oxen: " + inv.displayOxen() + "\nfood: " + inv.displayFood() + "\nclothing: " + inv.displayClothing() + "\nparts: " + inv.displayParts() + "\nAmmunition: " + inv.displayAmmo();
+        String create = "oxen: " + inv.displayOxen() + "\nfood: " + inv.displayFood() + "\nclothing: " + inv.displayClothing() + "\nparts: " + inv.displayParts() + "\nAmmunition: " + inv.displayAmmo() + "\nmoney: " + money + "\nfamily: " + family;
         return create;
     }
 
@@ -38,7 +40,7 @@ public class player {
         }
     }
 
-    public int displayInv (int catagorize)
+    public int getInv (int catagorize)
     {
         switch (catagorize)
         {
@@ -56,12 +58,12 @@ public class player {
         return 0;
     }
 
-    public int displayFamily ()
+    public int getFamily ()
     {
         return family;
     }
 
-    public int displayMoney ()
+    public int getMoney ()
     {
         return money;
     }
@@ -76,8 +78,73 @@ public class player {
         family--;
     }
 
-    public void eat ()
+    public void eat (int x)
     {
-        inv.changeFood(family * -5);
+        inv.changeFood((family * -5)*x);
+    }
+
+    public int getDisplay ()
+    {
+        return display;
+    }
+
+    public void setDisplay (int x)
+    {
+        display = x;
+    }
+
+    public int getChoice (){
+        return choice;
+    }
+
+    public void input (Location loc, String in)
+    {
+        switch (display) {
+            case 0: worldInput (loc, in);
+            break;
+            case 1: shopInput (in);
+            break;
+            case 2: buyInput (in);
+            break;
+        }
+    }
+
+    public void worldInput (Location loc, String in)
+    {
+        switch (in){
+            case "0": loc.inc(10);
+            break;
+            case "1":
+            break;
+            case "2":
+                if ( loc.getDistance() == 120 ||  loc.getDistance() == 340 || loc.getDistance() == 0)
+                {
+                    display = 1;
+                }
+                break;
+        }
+    }
+
+    public void shopInput (String in) {
+        display = 2;
+        switch (in){
+            case "0": choice = 0;
+            break;
+            case "1": choice = 1;
+            break;
+            case "2": choice = 2;
+            break;
+            case "3": choice = 3;
+            break;
+            case "4": choice = 4;
+            break;
+        }
+    }
+
+    public void buyInput (String in)
+    {
+        int n = Integer.parseInt(in);
+
+        changeInv(choice, n);
     }
 }
