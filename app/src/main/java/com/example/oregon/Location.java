@@ -1,17 +1,20 @@
 public class Location {
-   private int distance=0;
-   private String name;
-   public Location(int distance, String name){
-       this.distance=distance;
-       this.name=name;
-   }
+    private int distance=0;
+    private String name;
+    public Location(int distance, String name){
+        this.distance=distance;
+        this.name=name;
+    }
 
     public int getDistance() {
-       distance+=10;
         return distance;
     }
+    
+    public void inc (int x) {
+        distance += x;
+    }
     public String getName() {
-       int setDistance=getDistance()+10;
+        int setDistance=getDistance()+10;
         if (setDistance == 120) {
             name = "Fort Leavenworth, Kansas";
         }
@@ -27,10 +30,9 @@ public class Location {
         else{
             name="";
         }
-return name;
+        return name;
     }
     public void setName(String name){
-       this.name=name;
+        this.name=name;
     }
 }
-
