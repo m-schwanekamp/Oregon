@@ -30,18 +30,18 @@ public class inventory {
     }
 
     public void changeAmmo (int x){
-        ammo = x;
+        ammo += x;
     }
     public void changeFood (int x){
-        food = x;
+        food += x;
     }
     public void changeOxen (int x){
-        ox = x;
+        ox += x;
     }
     public void changeClothing (int x){
-        clothing = x;
+        clothing += x;
     }
     public void changeParts (int x){
-        parts = x;
+        parts += x;
     }
 }
