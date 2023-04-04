@@ -15,12 +15,23 @@ public class player {
     private event[] eventlist = new event [eventsize];
     private String eventLog;
 
+    //default constructor for player
+    public player ()
+    {
+        name = "Hattie Campbell";
+        initializeEvent();
+    }
+    
+    //constructor
+    //@param inName - name for player
     public player (String inName)
     {
         name = inName;
         initializeEvent();
     }
 
+    //initializeEvent
+    //creates the list of random events
     public void initializeEvent ()
     {
         eventlist [0] = new event("death by dysentary", 95, 0);
@@ -28,22 +39,29 @@ public class player {
 
     }
 
+    
+    //getter for event log
     public String getEventLog ()
     {
         return eventLog;
     }
-
+    
+    //getter for name
     public String getName ()
     {
         return name;
     }
 
+    // getInvText
+    // @return - string displaying all sections of inventory
     public String getInvText ()
     {
         String create = "oxen: " + inv.displayOxen() + "\nfood: " + inv.displayFood() + "\nclothing: " + inv.displayClothing() + "\nparts: " + inv.displayParts() + "\nAmmunition: " + inv.displayAmmo() + "\nmoney: " + money + "\nfamily: " + family;
         return create;
     }
 
+    // setter for inventory
+    // @param catagorize - meant to tell which variable in inventory to change
     public void changeInv (int catagorize, int x)
     {
         switch (catagorize)
@@ -60,7 +78,9 @@ public class player {
                 break;
         }
     }
-
+    
+    //getter for event log
+    //@param catagorize - determines which part of inventory to get
     public int getInv (int catagorize)
     {
         switch (catagorize)
@@ -79,45 +99,60 @@ public class player {
         return 0;
     }
 
+    //getter for number of family member
     public int getFamily ()
     {
         return family;
     }
 
+    //getter for money
     public int getMoney ()
     {
         return money;
     }
 
+    //spend
+    //@param x - ammount of money spent
     public void spend (int x)
     {
         money -= x;
     }
 
+    //death
+    //method to remove family members on death
     public void death ()
     {
         family--;
     }
 
+    //eat
+    //method to remove food when eating
     public void eat (int x)
     {
         inv.changeFood((family * -5)*x);
     }
 
+
+    //getter for which display the game is currently on
     public int getDisplay ()
     {
         return display;
     }
 
+    //setter for which display the game is currently on
     public void setDisplay (int x)
     {
         display = x;
     }
 
+    //getter for players choice of what to buy
     public int getChoice (){
         return choice;
     }
 
+    //handleEvent
+    //tries to activate different types of events on the event list. Updates event log with successfully activated events
+    //@param loc - location object reference for events that effect location
     public void handleEvent (location loc)
     {
         eventLog = "";
@@ -128,6 +163,10 @@ public class player {
         }
     }
 
+    //input
+    //decides which other input method to use based off display
+    //@param loc - location object reference for when interaction is required
+    //@param in - input of the user
     public void input (location loc, String in)
     {
         switch (display) {
@@ -139,7 +178,11 @@ public class player {
                 break;
         }
     }
-
+    
+    //worldInput
+    //decides which input to use while traveling
+    //@param loc - location object reference for when interaction is required
+    //@param in - input of the user
     public void worldInput (location loc, String in)
     {
         switch (in){
@@ -159,6 +202,9 @@ public class player {
         }
     }
 
+    //shopInput
+    //decides which input to use while in a shop
+    //@param in - input of the user
     public void shopInput (String in) {
         display = 2;
         switch (in){
@@ -175,7 +221,10 @@ public class player {
             case "5": display = 0;
         }
     }
-
+    
+    //buyInput
+    //decides how much of an object the player wants to buy. The object in question is determined by choice
+    //@param in - how much the player wants to buy
     public void buyInput (String in)
     {
         int n = Integer.parseInt(in);
