@@ -26,7 +26,7 @@ public class player {
     {
         return eventLog;
     }
-    
+
     public String getName ()
     {
         return name;
@@ -137,7 +137,7 @@ public class player {
     {
         switch (in){
             case "0":
-                loc.inc(10);
+                loc.inc(20);
                 eat (1);
                 handleEvent(loc);
             break;
