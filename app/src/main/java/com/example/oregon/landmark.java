@@ -9,12 +9,12 @@ public class landmark {
         name = nam;
         type = ty;
     }
-
+    //@returns location to game display
     public int getLocation ()
     {
         return location;
     }
-
+    //@returns name of player
     public String getName ()
     {
         return name;
