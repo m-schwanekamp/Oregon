@@ -16,12 +16,10 @@ public class event {
         chance = chan;
         id = i;
     }
-
     public String getName ()
     {
         return name;
     }
-
     public int getPeople ()
     {
         return people;
