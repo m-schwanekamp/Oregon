@@ -35,20 +35,22 @@ public class event {
         return activity;
     }
 
-    public void activate (Location loc, player play)
+    public boolean activate (Location loc, player play, event [] eventlist)
     {
         int n = random.nextInt() % 100;
-        
+
         if (n <= chance) {
             switch (id) {
                 case 0:
                     dysentaryCon();
                     break;
                 case 1:
-                    dysentaryDie(play);
+                    dysentaryDie(play, eventlist);
                     break;
             }
+            return true;
         }
+        return false;
     }
 
     public void deactivate ()
@@ -65,15 +67,21 @@ public class event {
     {
         chance = x;
     }
-    
+
     public void dysentaryCon ()
     {
         activity = true;
         people ++;
     }
-    
-    public void dysentaryDie (player play)
+
+    public void dysentaryDie (player play, event [] eventList)
     {
-        play.death();
+        if (eventList [0].getActivity())
+            play.death();
+
+        eventList [0].affectPeople(-1);
+
+        if (eventList [0].getPeople() == 0)
+            eventList [0].deactivate();
     }
 }
