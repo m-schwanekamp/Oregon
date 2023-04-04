@@ -6,10 +6,19 @@ public class player {
     private inventory inv = new inventory();
     private int display = 0;
     private int choice = 0;
+    private final int eventsize = 2;
+    private event [] eventlist = new event [eventsize];
 
     public player (String inName)
     {
         name = inName;
+        initializeEvent();
+    }
+
+    public void initializeEvent ()
+    {
+        eventlist [0] = new event("dysentary", 4, 0);
+        eventlist [1] = new event("dysentary die", 3, 1);
     }
 
     public String getName ()
@@ -97,6 +106,14 @@ public class player {
         return choice;
     }
 
+    public void handleEvent (Location loc)
+    {
+        for (int i = 0; i < eventlist.length; i ++)
+        {
+            eventlist [i].activate(loc, this, eventlist);
+        }
+    }
+    
     public void input (Location loc, String in)
     {
         switch (display) {
@@ -112,7 +129,10 @@ public class player {
     public void worldInput (Location loc, String in)
     {
         switch (in){
-            case "0": loc.inc(10);
+            case "0":
+                loc.inc(10);
+                eat (1);
+                handleEvent(loc);
             break;
             case "1":
             break;
@@ -138,6 +158,7 @@ public class player {
             break;
             case "4": choice = 4;
             break;
+            case "5": display = 0;
         }
     }
 
@@ -146,5 +167,7 @@ public class player {
         int n = Integer.parseInt(in);
 
         changeInv(choice, n);
+        display = 1;
     }
+
 }
