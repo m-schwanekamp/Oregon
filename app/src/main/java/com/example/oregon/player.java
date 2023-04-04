@@ -8,6 +8,7 @@ public class player {
     private int choice = 0;
     private final int eventsize = 2;
     private event [] eventlist = new event [eventsize];
+    private String eventLog;
 
     public player (String inName)
     {
@@ -18,9 +19,14 @@ public class player {
     public void initializeEvent ()
     {
         eventlist [0] = new event("dysentary", 4, 0);
-        eventlist [1] = new event("dysentary die", 3, 1);
+        eventlist [1] = new event("death by dysentary", 3, 1);
     }
 
+    public String getEventLog ()
+    {
+        return eventLog;
+    }
+    
     public String getName ()
     {
         return name;
@@ -110,10 +116,11 @@ public class player {
     {
         for (int i = 0; i < eventlist.length; i ++)
         {
-            eventlist [i].activate(loc, this, eventlist);
+            if (eventlist [i].activate(loc, this, eventlist))
+                eventLog = eventLog + ", " + eventlist [i].getName();
         }
     }
-    
+
     public void input (Location loc, String in)
     {
         switch (display) {
