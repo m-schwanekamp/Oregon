@@ -1,3 +1,8 @@
+//@param shows current landmark while traveling
+//Also shows the type of landmark.
+//@param loc- location of landmark
+//@param nam- name of the landmark
+//@param ty- type of landmark (fort, river, etc)
 public class landmark {
     private int location;
     private String name;
