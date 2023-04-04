@@ -1,5 +1,5 @@
 /**
- Name of File: MVP
+ Name of File: Location.java
  Date of Writing: 4/4/2023
  Name: Mark Mintzlaff
  Description: This class represents the distance traveled part of the game. When the player wants to travel the trail, distance is incremented. This class also tells the user when they are at a landmark or fort to go shopping
