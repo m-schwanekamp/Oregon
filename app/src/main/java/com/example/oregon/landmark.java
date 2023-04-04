@@ -14,12 +14,12 @@ public class landmark {
     {
         return location;
     }
-    //@returns name of player
+    //@returns name of landmark
     public String getName ()
     {
         return name;
     }
-
+    //@returns location type
     public int getType ()
     {
         return type;
