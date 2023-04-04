@@ -1,3 +1,5 @@
+package com.example.mvp;
+
 import java.util.Random;
 
 public class event {
@@ -35,18 +37,18 @@ public class event {
         return activity;
     }
 
-    public boolean activate (Location loc, player play, event [] eventlist)
+    public boolean activate (location loc, player play, event [] eventlist)
     {
         int n = random.nextInt() % 100;
-        
-        boolean check = false; 
-        if (n <= chance) {
+
+        boolean check = false;
+        if (n >= chance) {
             switch (id) {
                 case 0:
-                    check = dysentaryCon();
+                    check = dysentaryDie(play, eventlist);
                     break;
                 case 1:
-                    check = dysentaryDie(play, eventlist);
+                    check = dysentaryCon();
                     break;
             }
             return check;
@@ -78,13 +80,13 @@ public class event {
 
     public boolean dysentaryDie (player play, event [] eventList)
     {
-        if (eventList [0].getActivity()) {
+        if (eventList [1].getActivity()) {
             play.death();
 
-            eventList[0].affectPeople(-1);
+            eventList[1].affectPeople(-1);
 
-            if (eventList[0].getPeople() == 0)
-                eventList[0].deactivate();
+            if (eventList[1].getPeople() == 0)
+                eventList[1].deactivate();
             return true;
         }
         return false;
