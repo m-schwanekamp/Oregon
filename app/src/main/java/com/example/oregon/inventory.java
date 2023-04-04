@@ -1,3 +1,8 @@
+//@param updates inventory stats throughout the game
+//during each turn.
+//includes food, ammo, ox, clothing and parts.
+//@param when button is clicked by player,
+//inventory updates
 public class inventory {
     private int ammo = 0;
     private int food = 0;
