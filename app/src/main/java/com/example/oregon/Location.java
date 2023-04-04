@@ -9,22 +9,21 @@ public class Location {
     public int getDistance() {
         return distance;
     }
-    
+
     public void inc (int x) {
         distance += x;
     }
     public String getName() {
-        int setDistance=getDistance()+10;
-        if (setDistance == 120) {
+        if (distance == 120) {
             name = "Fort Leavenworth, Kansas";
         }
-        else if (setDistance == 340) {
+        else if (distance == 340) {
             name = "Fort Kearney, Nebraska";
         }
-        else if(setDistance == 420) {
+        else if(distance == 420) {
             name="Chimney Rock";
         }
-        else if(setDistance == 500) {
+        else if(distance == 500) {
             name="Ash Hollow, Nebraska";
         }
         else{
