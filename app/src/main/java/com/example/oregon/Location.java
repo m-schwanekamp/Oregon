@@ -52,6 +52,39 @@ public class Location {
         else if(distance == 500) {
             name="Ash Hollow, Nebraska";
         }
+     else if(distance == 660) {
+            name="Fort Laramie, Wyoming";
+     }
+     else if(distance == 840) {
+            name="Independence Rock, Wyoming";
+     }
+     else if(distance == 940) {
+            name="South Pass, Wyoming";
+     }
+     else if(distance == 980) {
+            name="Fort Bridger, Wyoming";
+     }
+     else if(distance == 1100) {
+            name="Soda Springs, Idaho";
+     }
+     else if(distance == 1160) {
+            name="Fort Hall, Idaho";
+     }
+     else if(distance == 1100) {
+            name="Soda Springs, Idaho";
+     }
+     else if(distance == 1380) {
+            name="Fort Boise, Idaho";
+     }
+     else if(distance == 1620) {
+            name="Fort Walla Walla, Washington";
+     }
+     else if(distance == 1720) {
+            name="The Dalles, Oregon";
+     }
+      else if(distance == 1860) {
+            name="Willamette Valley, Oregon";
+     }
         else{
             name="";
         }
