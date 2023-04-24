@@ -17,7 +17,7 @@ public class event {
 
     //Creates Random Number Method
     private Random random = new Random();
-    
+
     //default constructor
     public event (String nam, int chan, int i)
     {
@@ -37,7 +37,7 @@ public class event {
     {
         return people;
     }
-    
+
     //getter method for chance of the random event happening
     public int getChance ()
     {
@@ -54,18 +54,42 @@ public class event {
     @param location loc: object reference for location; player play: object reference for player; event [] eventlist: referencing the list of events
     @return true if the event activate; false if not activated
      */
-    public boolean activate (location loc, player play, event [] eventlist)
+    public boolean activate (location loc, player play, event [] eventlist, boolean auto)
     {
         int n = random.nextInt() % 100;
 
         boolean check = false;
-        if (n >= chance) {
+        if (n >= chance || auto) {
             switch (id) {
                 case 0:
                     check = dysentaryDie(play, eventlist);
                     break;
                 case 1:
                     check = dysentaryCon();
+                    break;
+                case 2:
+                    check = lost(play, loc);
+                    break;
+                case 3:
+                    check = oxenIll(play);
+                    break;
+                case 4:
+                    check = oxenDeath(play, eventlist);
+                    break;
+                case 5:
+                    check = dysRec(eventlist);
+                    break;
+                case 6:
+                    check = oxRec(eventlist);
+                    break;
+                case 7:
+                    check = broken(play);
+                    break;
+                case 8:
+                    check = blizard();
+                    break;
+                case 9:
+                    check = thief(play);
                     break;
             }
             return check;
@@ -98,7 +122,7 @@ public class event {
         people ++;
         return true;
     }
-    
+
     /*dysentaryDie() checks to see if dysentary event is active and if so a family member dies
     @param player play: object reference for player; event [] eventlist: referencing the list of events
     @return true if events activates therefore killing family member, false otherwise
@@ -116,4 +140,81 @@ public class event {
         }
         return false;
     }
+
+    public boolean lost (player play, location loc)
+    {
+        int days = (random.nextInt() % 3) + 4;
+        for (int i = 0; i < days; i ++) {
+            play.eat(1);
+            loc.inc(0);
+        }
+        return true;
+    }
+
+    public boolean oxenIll (player play)
+    {
+        activity = true;
+        return true;
+    }
+
+    public boolean oxenDeath (player play, event [] eventList)
+    {
+        if (eventList [3].getActivity())
+        {
+            play.changeInv(0, -1);
+
+            eventList [3].deactivate();
+
+            return true;
+        }
+        return false;
+    }
+
+    public boolean dysRec (event [] eventList)
+    {
+        if (eventList [1].getActivity())
+        {
+            eventList [1].deactivate();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean oxRec (event [] eventList)
+    {
+        if (eventList [3].getActivity())
+        {
+            eventList [3].deactivate();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean broken (player play)
+    {
+        play.changeInv(3, -1);
+        return true;
+    }
+
+    public boolean blizard (location loc, player play, event [] eventList)
+    {
+        if (play.getInv(2) <= 6)
+        {
+            int days = (random.nextInt() % 3) + 4;
+            for (int i = 0; i < days; i ++) {
+                play.eat(1);
+                loc.inc(0);
+            }
+            eventList [1].activate(loc, play, eventList, true);
+        }
+        return true;
+    }
+
+    public boolean thief (player play)
+    {
+        play.changeInv (1, -30);
+        return true;
+    }
 }
+
+
