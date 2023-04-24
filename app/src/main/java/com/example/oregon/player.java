@@ -21,7 +21,7 @@ public class player {
         name = "Hattie Campbell";
         initializeEvent();
     }
-    
+
     //constructor
     //@param inName - name for player
     public player (String inName)
@@ -36,16 +36,23 @@ public class player {
     {
         eventlist [0] = new event("death by dysentary", 95, 0);
         eventlist [1] = new event("dysentary", 90, 1);
-
+        eventlist [2] = new event("got lost", 90, 2);
+        eventlist [3] = new event("oxen fallen ill", 90, 3);
+        eventlist [4] = new event("oxen has died", 90, 4);
+        eventlist [5] = new event("recovered from dysentary", 90, 5);
+        eventlist [6] = new event("oxen recovered", 90, 6);
+        eventlist [7] = new event("parts broken", 90, 7);
+        eventlist [8] = new event("blizard", 90, 8);
+        eventlist [9] = new event("thief has stollen food", 90, 9);
     }
 
-    
+
     //getter for event log
     public String getEventLog ()
     {
         return eventLog;
     }
-    
+
     //getter for name
     public String getName ()
     {
@@ -78,7 +85,7 @@ public class player {
                 break;
         }
     }
-    
+
     //getter for event log
     //@param catagorize - determines which part of inventory to get
     public int getInv (int catagorize)
@@ -158,7 +165,7 @@ public class player {
         eventLog = "";
         for (int i = 0; i < eventlist.length; i ++)
         {
-            if (eventlist [i].activate(loc, this, eventlist))
+            if (eventlist [i].activate(loc, this, eventlist, false))
                 eventLog = eventLog + "\n" + eventlist [i].getName();
         }
     }
@@ -178,7 +185,7 @@ public class player {
                 break;
         }
     }
-    
+
     //worldInput
     //decides which input to use while traveling
     //@param loc - location object reference for when interaction is required
@@ -221,7 +228,7 @@ public class player {
             case "5": display = 0;
         }
     }
-    
+
     //buyInput
     //decides how much of an object the player wants to buy. The object in question is determined by choice
     //@param in - how much the player wants to buy
