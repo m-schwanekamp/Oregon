@@ -14,16 +14,20 @@ public class event {
     private int people = 0;
     private boolean activity = false;
     private int chance;
+    private int riskChance;
+    private int restChance;
 
     //Creates Random Number Method
     private Random random = new Random();
 
     //default constructor
-    public event (String nam, int chan, int i)
+    public event (String nam, int chan, int i, int risk, int rest)
     {
         name = nam;
         chance = chan;
         id = i;
+        riskChance = risk;
+        restChance = rest;
     }
 
     //getter method for name 
@@ -54,9 +58,16 @@ public class event {
     @param location loc: object reference for location; player play: object reference for player; event [] eventlist: referencing the list of events
     @return true if the event activate; false if not activated
      */
-    public boolean activate (location loc, player play, event [] eventlist, boolean auto)
+    public boolean activate (Location loc, player play, event [] eventlist, boolean auto)
     {
         int n = random.nextInt() % 100;
+
+        int alter = (play.getRations() + play.getTravel()) * riskChance;
+
+        if (play.getResting())
+            alter = restChance;
+
+        n += alter;
 
         boolean check = false;
         if (n >= chance || auto) {
@@ -196,7 +207,7 @@ public class event {
         return true;
     }
 
-    public boolean blizard (location loc, player play, event [] eventList)
+    public boolean blizard (Location loc, player play, event [] eventList)
     {
         if (play.getInv(2) <= 6)
         {
@@ -216,5 +227,4 @@ public class event {
         return true;
     }
 }
-
 
