@@ -293,6 +293,23 @@ public class player {
         int n = Integer.parseInt(in);
 
         changeInv(choice, n);
+
+        int mon = 0;
+
+        switch (choice) {
+            case 0: mon = n*40;
+            break;
+            case 1: mon = n;
+            break;
+            case 2: mon = n*10;
+            break;
+            case 3: mon = n*10;
+            break;
+            case 4: mon = n;
+            break;
+        }
+
+        money -= mon;
         display = 1;
     }
 
@@ -305,6 +322,7 @@ public class player {
             handleEvent(loc);
         }
         resting = false;
+        display = 0;
     }
 
     public void rationInput (String in)
@@ -314,6 +332,7 @@ public class player {
         {
             rations = n;
         }
+        display = 0;
     }
 
     public void travelInput (String in)
@@ -323,5 +342,6 @@ public class player {
         {
             travel = n;
         }
+        display = 0;
     }
 }
