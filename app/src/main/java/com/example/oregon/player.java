@@ -14,6 +14,9 @@ public class player {
     private final int eventsize = 2;
     private event[] eventlist = new event [eventsize];
     private String eventLog;
+    private int rations = 0;
+    private int travel = 0;
+    private boolean resting = false;
 
     //default constructor for player
     public player ()
@@ -34,16 +37,16 @@ public class player {
     //creates the list of random events
     public void initializeEvent ()
     {
-        eventlist [0] = new event("death by dysentary", 95, 0);
-        eventlist [1] = new event("dysentary", 90, 1);
-        eventlist [2] = new event("got lost", 90, 2);
-        eventlist [3] = new event("oxen fallen ill", 90, 3);
-        eventlist [4] = new event("oxen has died", 90, 4);
-        eventlist [5] = new event("recovered from dysentary", 90, 5);
-        eventlist [6] = new event("oxen recovered", 90, 6);
-        eventlist [7] = new event("parts broken", 90, 7);
-        eventlist [8] = new event("blizard", 90, 8);
-        eventlist [9] = new event("thief has stollen food", 90, 9);
+        eventlist [0] = new event("death by dysentary", 95, 0, 1, -100);
+        eventlist [1] = new event("dysentary", 90, 1, 1, -100);
+        eventlist [2] = new event("got lost", 90, 2, 0, -100);
+        eventlist [3] = new event("oxen fallen ill", 90, 3, 1, -100);
+        eventlist [4] = new event("oxen has died", 90, 4, 1, -100);
+        eventlist [5] = new event("recovered from dysentary", 90, 5, -1, 20);
+        eventlist [6] = new event("oxen recovered", 90, 6, -1, 20);
+        eventlist [7] = new event("parts broken", 90, 7, 1, -100);
+        eventlist [8] = new event("blizard", 90, 8, 0, 0);
+        eventlist [9] = new event("thief has stollen food", 90, 9, 0, 0);
     }
 
 
@@ -136,7 +139,7 @@ public class player {
     //method to remove food when eating
     public void eat (int x)
     {
-        inv.changeFood((family * -5)*x);
+        inv.changeFood((family * (5 * (rations - 3)))*x);
     }
 
 
@@ -156,6 +159,12 @@ public class player {
     public int getChoice (){
         return choice;
     }
+
+    public int getRations () {return rations;}
+
+    public int getTravel () {return travel;}
+
+    public boolean getResting () {return resting;}
 
     //handleEvent
     //tries to activate different types of events on the event list. Updates event log with successfully activated events
@@ -177,16 +186,25 @@ public class player {
             case 0:
                 output = "type 0 to progress on the trail\ntype 1 to manage your inventory\ntype 2 to go to the shop";
                 break;
-            case 1: 
+            case 1:
                 output = "choose which goods to purchase:\n0 = oxen\n1 = food\n2 = clothing\n3 = parts\n4 = ammunition\npress 5 to leave";
                 break;
             case 2:
                 output = "type how much you wish to buy";
                 break;
+            case 3:
+                output = "choose how long you wish to rest";
+                break;
+            case 4:
+                output = "choose which ration plan:\n0 = large rations\n1 = mediumn rations\n2 = small rations";
+                break;
+            case 5:
+                output = "choose how long you wish to travel each day:\n0 = 20 miles\n1 = 40 miles\n2 = 60 miles";
+                break;
             case 999:
-                output = "type anything to continue"
+                output = "type anything to continue";
         }
-        
+
         return output;
     }
 
@@ -203,6 +221,12 @@ public class player {
                 break;
             case 2: buyInput (in);
                 break;
+            case 3: restInput(in, loc);
+                break;
+            case 4: rationInput(in);
+                break;
+            case 5: travelInput(in);
+                break;
             case 999:
                 display = 0;
                 break;
@@ -217,7 +241,7 @@ public class player {
     {
         switch (in){
             case "0":
-                loc.inc(20);
+                loc.inc(20 * (travel + 1));
                 eat (1);
                 handleEvent(loc);
                 break;
@@ -228,6 +252,15 @@ public class player {
                 {
                     display = 1;
                 }
+                break;
+            case "3":
+                display = 3;
+                break;
+            case "4":
+                display = 4;
+                break;
+            case "5":
+                display 5;
                 break;
         }
     }
@@ -263,4 +296,32 @@ public class player {
         display = 1;
     }
 
+    public void restInput (String in, Location loc)
+    {
+        resting = true;
+        int n = Integer.parseInt(in);
+        for (int i = 0; i < n; i ++) {
+            loc.inc(0);
+            handleEvent(loc);
+        }
+        resting = false;
+    }
+
+    public void rationInput (String in)
+    {
+        int n = Integer.parseInt(in);
+        if (0 <= n || n <= 2)
+        {
+            rations = n;
+        }
+    }
+
+    public void travelInput (String in)
+    {
+        int n = Integer.parseInt(in);
+        if (0 <= n || n <= 2)
+        {
+            travel = n;
+        }
+    }
 }
