@@ -30,7 +30,7 @@ public class event {
         restChance = rest;
     }
 
-    //getter method for name 
+    //getter method for name
     public String getName ()
     {
         return name;
@@ -58,7 +58,7 @@ public class event {
     @param location loc: object reference for location; player play: object reference for player; event [] eventlist: referencing the list of events
     @return true if the event activate; false if not activated
      */
-    public boolean activate (Location loc, player play, event [] eventlist, boolean auto)
+    public boolean activate (location loc, player play, event [] eventlist, boolean auto)
     {
         int n = random.nextInt() % 100;
 
@@ -97,7 +97,7 @@ public class event {
                     check = broken(play);
                     break;
                 case 8:
-                    check = blizard();
+                    check = blizard(loc, play, eventlist);
                     break;
                 case 9:
                     check = thief(play);
@@ -207,7 +207,7 @@ public class event {
         return true;
     }
 
-    public boolean blizard (Location loc, player play, event [] eventList)
+    public boolean blizard (location loc, player play, event [] eventList)
     {
         if (play.getInv(2) <= 6)
         {
