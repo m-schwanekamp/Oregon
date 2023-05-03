@@ -1,4 +1,4 @@
-package com.example.mvp;
+ackage com.example.mvp;
 
 public class inventory {
     // initialize variables for things in inventory
@@ -17,25 +17,28 @@ public class inventory {
     {
         return ammo;
     }
-    
+
     //getter for food
     public int displayFood ()
     {
+        /*if(food<-25){
+            food=food/0;
+        */
         return food;
     }
-    
+
     //getter for oxen
     public int displayOxen ()
     {
         return ox;
     }
-    
+
     //getter for clothing
     public int displayClothing ()
     {
         return clothing;
     }
-    
+
     //getter for parts
     public int displayParts ()
     {
@@ -46,25 +49,25 @@ public class inventory {
     public void changeAmmo (int x){
         ammo += x;
     }
-    
+
     //setter for food
     public void changeFood (int x){
         food += x;
     }
-    
-    
+
+
     //setter for oxen
     public void changeOxen (int x){
         ox += x;
     }
-    
-    
+
+
     //setter for clothing
     public void changeClothing (int x){
         clothing += x;
     }
-    
-    
+
+
     //setter for parts
     public void changeParts (int x){
         parts += x;
