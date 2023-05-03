@@ -11,7 +11,7 @@ public class player {
     private inventory inv = new inventory();
     private int display = 999;
     private int choice = 0;
-    private final int eventsize = 2;
+    private final int eventsize = 10;
     private event[] eventlist = new event [eventsize];
     private String eventLog;
     private int rations = 0;
@@ -139,7 +139,7 @@ public class player {
     //method to remove food when eating
     public void eat (int x)
     {
-        inv.changeFood((family * (5 * (rations - 3)))*x);
+        inv.changeFood((family * (rations - 3))*x);
     }
 
 
@@ -169,7 +169,7 @@ public class player {
     //handleEvent
     //tries to activate different types of events on the event list. Updates event log with successfully activated events
     //@param loc - location object reference for events that effect location
-    public void handleEvent (Location loc)
+    public void handleEvent (location loc)
     {
         eventLog = "";
         for (int i = 0; i < eventlist.length; i ++)
@@ -184,10 +184,10 @@ public class player {
         String output = "";
         switch (display) {
             case 0:
-                output = "type 0 to progress on the trail\ntype 1 to manage your inventory\ntype 2 to go to the shop";
+                output = "type 0 to progress on the trail\ntype 1 to go to the shop\ntype 2 to rest\ntype 3 to manage your rations\ntype 4 to manage your travel speed";
                 break;
             case 1:
-                output = "choose which goods to purchase:\n0 = oxen\n1 = food\n2 = clothing\n3 = parts\n4 = ammunition\npress 5 to leave";
+                output = "choose which goods to purchase:\n0 = oxen\n1 = food\n2 = clothing\n3 = parts\n4 = ammunition       press 5 to leave";
                 break;
             case 2:
                 output = "type how much you wish to buy";
@@ -212,7 +212,7 @@ public class player {
     //decides which other input method to use based off display
     //@param loc - location object reference for when interaction is required
     //@param in - input of the user
-    public void input (Location loc, String in)
+    public void input (location loc, String in)
     {
         switch (display) {
             case 0: worldInput (loc, in);
@@ -237,7 +237,7 @@ public class player {
     //decides which input to use while traveling
     //@param loc - location object reference for when interaction is required
     //@param in - input of the user
-    public void worldInput (Location loc, String in)
+    public void worldInput (location loc, String in)
     {
         switch (in){
             case "0":
@@ -246,21 +246,19 @@ public class player {
                 handleEvent(loc);
                 break;
             case "1":
-                break;
-            case "2":
                 if ( loc.getDistance() == 120 ||  loc.getDistance() == 340 || loc.getDistance() == 0)
                 {
                     display = 1;
                 }
                 break;
-            case "3":
+            case "2":
                 display = 3;
                 break;
-            case "4":
+            case "3":
                 display = 4;
                 break;
-            case "5":
-                display 5;
+            case "4":
+                display = 5;
                 break;
         }
     }
@@ -298,22 +296,22 @@ public class player {
 
         switch (choice) {
             case 0: mon = n*40;
-            break;
+                break;
             case 1: mon = n;
-            break;
+                break;
             case 2: mon = n*10;
-            break;
+                break;
             case 3: mon = n*10;
-            break;
+                break;
             case 4: mon = n;
-            break;
+                break;
         }
 
         money -= mon;
         display = 1;
     }
 
-    public void restInput (String in, Location loc)
+    public void restInput (String in, location loc)
     {
         resting = true;
         int n = Integer.parseInt(in);
