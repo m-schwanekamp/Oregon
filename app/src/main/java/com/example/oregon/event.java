@@ -151,7 +151,10 @@ public class event {
         }
         return false;
     }
-
+    /*lost() random event that simulates user getting lost on trail
+    @param player play: object reference for player; location loc: object reference for location
+    @return true if events activates therefore taking away some food, false otherwise
+     */
     public boolean lost (player play, location loc)
     {
         int days = (random.nextInt() % 3) + 4;
@@ -161,13 +164,16 @@ public class event {
         }
         return true;
     }
-
+    //Method to simulate one of the user's oxen falling ill    
     public boolean oxenIll (player play)
     {
         activity = true;
         return true;
     }
-
+    /* oxenDeath() random event that simulates death of oxen. Oxen Ill method must be true for this to activate
+    @param player play: object reference for player; event [] eventlist: referencing the list of events
+    @return true if events activates therefore taking away 1 oxen (oxenIll() method must be true in order for this class to be true, false otherwise
+     */
     public boolean oxenDeath (player play, event [] eventList)
     {
         if (eventList [3].getActivity())
@@ -180,7 +186,7 @@ public class event {
         }
         return false;
     }
-
+    //This method deactivates dysentary on a person making them unable to further die from dysentary
     public boolean dysRec (event [] eventList)
     {
         if (eventList [1].getActivity())
@@ -190,7 +196,7 @@ public class event {
         }
         return false;
     }
-
+    //This method deactivates oxen falling ill making them unable for that oxen to die
     public boolean oxRec (event [] eventList)
     {
         if (eventList [3].getActivity())
@@ -200,7 +206,7 @@ public class event {
         }
         return false;
     }
-
+    //this method simulates your wagon breaking 
     public boolean broken (player play)
     {
         play.changeInv(3, -1);
