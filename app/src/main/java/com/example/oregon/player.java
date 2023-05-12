@@ -310,7 +310,10 @@ public class player {
         money -= mon;
         display = 1;
     }
-
+    /* restInput() input method for dealing with how many days the user wants to rest
+    @param String in - how many days the player wants to rest; location loc: object reference for when interaction is required
+    @return void
+    */
     public void restInput (String in, location loc)
     {
         resting = true;
@@ -322,7 +325,10 @@ public class player {
         resting = false;
         display = 0;
     }
-
+    /* rationInput() method to ask user how they want to change rations
+    @param: String in: How the user wants to handle their rations
+    @return void
+    */
     public void rationInput (String in)
     {
         int n = Integer.parseInt(in);
@@ -332,7 +338,10 @@ public class player {
         }
         display = 0;
     }
-
+    /* travelInput() method to handle the input of the user wanting to travel
+    @param String in: how fast the player wants to travel
+    @return void
+    */
     public void travelInput (String in)
     {
         int n = Integer.parseInt(in);
