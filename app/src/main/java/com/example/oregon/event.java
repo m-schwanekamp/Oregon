@@ -206,13 +206,16 @@ public class event {
         }
         return false;
     }
-    //this method simulates your wagon breaking 
+    // this method simulates your wagon breaking 
     public boolean broken (player play)
     {
         play.changeInv(3, -1);
         return true;
     }
-
+    /* blizzard() random event that simulates blizzard.
+    @param player play: object reference for player; event [] eventlist: referencing the list of events; location loc: object reference for location
+    @return true if events activates, if not enough clothes, player gets lost for a couple of days; false otherwise
+    */
     public boolean blizard (location loc, player play, event [] eventList)
     {
         if (play.getInv(2) <= 6)
@@ -226,7 +229,10 @@ public class event {
         }
         return true;
     }
-
+    /* theif() random event that simulates player getting robbed by bandits.
+    @param player play: object reference for player
+    @return true if events activates, therefore removing 30 food; false otherwise
+    */
     public boolean thief (player play)
     {
         play.changeInv (1, -30);
